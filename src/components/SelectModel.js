@@ -2,8 +2,7 @@ import React from "react";
 
 export default class SelectModel extends React.Component {
   // I put the selectedModel in the SelectModel state because of the sentence, "Also, the value of the <select> element should be read from the local state."
-  // I'm not sure if that is what was wanted or not. 
-  
+  // I'm not sure if that is what was wanted or not.
 
   state = { selectedModel: this.props.selectedModel };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import SelectModel from "./components/SelectModel";
 import { connect } from "react-redux";
-import ModelDetails from "./components/ModelDetails";
+import ModelDetailsContainer from "./components/ModelDetailsContainer";
 
 class App extends Component {
   state = {
@@ -62,9 +62,8 @@ class App extends Component {
   render = () => {
     return (
       <div className="App">
-        {this.props.selectedModels.map((model, index) => {
-          return <ModelDetails key={index} model={model} />;
-        })}
+        <ModelDetailsContainer />
+
         <SelectModel
           data={this.state.data}
           handleChange={this.updateSelection}

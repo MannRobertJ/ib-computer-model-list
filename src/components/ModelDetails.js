@@ -15,6 +15,7 @@ export default function ModelDetails(props) {
   );
 }
 
+
 ModelDetails.propTypes = {
   model: PropTypes.shape({
       name: PropTypes.string.isRequired,

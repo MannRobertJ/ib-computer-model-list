@@ -1,8 +1,9 @@
 import React from "react";
 
 export default class SelectModel extends React.Component {
-  // The homework says "Also, the value of the <select> element should be read from the local state."
-  // So I put the selectedModel in the SelectModel state. I'm not sure if that is what was wanted.
+  // I put the selectedModel in the SelectModel state because of the sentence, "Also, the value of the <select> element should be read from the local state."
+  // I'm not sure if that is what was wanted or not. 
+  
 
   state = { selectedModel: this.props.selectedModel };
 

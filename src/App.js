@@ -28,14 +28,15 @@ class App extends Component {
     }
   };
 
-  updateSelection = () => {
-    this.setState({selectedModel: this.value})
+  updateSelection = (event) => {
+    this.setState({selectedModel: event.target.value})
+    console.log(this.state.selectedModel)
   };
 
   render = () => {
     return (
       <div className="App">
-        <SelectModel data={this.state.data} handleChange={this.updateSelection} />
+        <SelectModel data={this.state.data} handleChange={this.updateSelection} selectedModel={this.selectedModel} />
       </div>
     );
   };

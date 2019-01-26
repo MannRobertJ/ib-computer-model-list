@@ -18,4 +18,9 @@ const mapStateToProps = state => {
   return { selectedModels: state };
 };
 
+
+
+
 export default connect(mapStateToProps)(ModelDetailsContainer);
+
+

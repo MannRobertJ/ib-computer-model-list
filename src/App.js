@@ -81,7 +81,7 @@ export default connect(mapStateToProps)(App);
 
 
 // I would normally have put this in its own file, but since the homework instructions say first not to write as a module, then to make it a controlled component, I assumed it was meant to be written here as its own component. 
-class SelectModel extends React.Component {
+class SelectModel extends Component {
   state = { selectedModel: this.props.selectedModel };
 
   render() {

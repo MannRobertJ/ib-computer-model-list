@@ -25,18 +25,23 @@ class App extends Component {
         year: 1982,
         origin: "USA"
       }
-    }
+    },
+    selectedModel: ""
   };
 
-  updateSelection = (event) => {
-    this.setState({selectedModel: event.target.value})
-    console.log(this.state.selectedModel)
+  updateSelection = event => {
+    this.setState({ selectedModel: event.target.value });
+    console.log(this.state.selectedModel);
   };
 
   render = () => {
     return (
       <div className="App">
-        <SelectModel data={this.state.data} handleChange={this.updateSelection} selectedModel={this.selectedModel} />
+        <SelectModel
+          data={this.state.data}
+          handleChange={this.updateSelection}
+          selectedModel={this.selectedModel}
+        />
       </div>
     );
   };

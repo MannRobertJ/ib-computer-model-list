@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import SelectModel from "./components/SelectModel";
 
 class App extends Component {
   state = {
@@ -30,15 +31,10 @@ class App extends Component {
   render = () => {
     return (
       <div className="App">
-        <select>
-          <option value=""> -- pick a model </option>
-          {Object.keys(this.state.data).map(name => (
-            <option value={name}>{name} ({this.state.data[name].year})</option>
-          ))}
-        </select>
+        <SelectModel data={this.state.data} />
       </div>
     );
-  }
+  };
 }
 
 export default App;

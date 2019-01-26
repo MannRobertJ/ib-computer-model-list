@@ -45,8 +45,13 @@ class App extends Component {
   updateSelection = event => {
     const model = this.state.data[event.target.value]
     this.setState({ selectedModel: model });
-    this.props.dispatch(this.addModel(model));
   };
+
+  clickButton = event => {
+    event.preventDefault()
+    const model = this.state.selectedModel
+    this.props.dispatch(this.addModel(model.name, model.year, model.origin))
+  }
 
   render = () => {
     return (
@@ -54,7 +59,7 @@ class App extends Component {
         <SelectModel
           data={this.state.data}
           handleChange={this.updateSelection}
-          selectedModel={this.selectedModel}
+          handleSubmit={this.clickButton}
         />
       </div>
     );

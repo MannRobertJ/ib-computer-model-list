@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import SelectModel from "./components/SelectModel";
 
 class App extends Component {
   state = {
@@ -24,21 +25,26 @@ class App extends Component {
         year: 1982,
         origin: "USA"
       }
-    }
+    },
+    selectedModel: ""
+  };
+
+  updateSelection = event => {
+    this.setState({ selectedModel: event.target.value });
+    console.log(this.state.selectedModel);
   };
 
   render = () => {
     return (
       <div className="App">
-        <select>
-          <option value=""> -- pick a model </option>
-          {Object.keys(this.state.data).map(name => (
-            <option value={name}>{`${name} (${this.state.data[name].year})`}</option>
-          ))}
-        </select>
+        <SelectModel
+          data={this.state.data}
+          handleChange={this.updateSelection}
+          selectedModel={this.selectedModel}
+        />
       </div>
     );
-  }
+  };
 }
 
 export default App;

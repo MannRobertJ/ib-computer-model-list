@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import SelectModel from "./components/SelectModel";
+import { connect } from "react-redux";
+import ModelDetailsContainer from "./components/ModelDetailsContainer";
 
 class App extends Component {
   state = {
@@ -26,25 +28,54 @@ class App extends Component {
         origin: "USA"
       }
     },
-    selectedModel: ""
+    selectedModel: {}
+  };
+
+  addModel = (name, manufacturer, year, origin) => {
+    return {
+      type: "ADD_MODEL",
+      payload: {
+        name: name,
+        manufacturer: manufacturer,
+        year: year,
+        origin: origin
+      }
+    };
   };
 
   updateSelection = event => {
-    this.setState({ selectedModel: event.target.value });
-    console.log(this.state.selectedModel);
+    const name = event.target.value;
+    const model = this.state.data[name];
+    this.setState({ selectedModel: { ...model, name: name } });
+  };
+
+  clickButton = event => {
+    event.preventDefault();
+    const model = this.state.selectedModel;
+    if (model.name && model.year && model.manufacturer && model.origin) {
+      this.props.dispatch(
+        this.addModel(model.name, model.manufacturer, model.year, model.origin)
+      );
+    }
   };
 
   render = () => {
     return (
       <div className="App">
+        <ModelDetailsContainer />
+
         <SelectModel
           data={this.state.data}
           handleChange={this.updateSelection}
-          selectedModel={this.selectedModel}
+          handleSubmit={this.clickButton}
         />
       </div>
     );
   };
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { selectedModels: state };
+};
+
+export default connect(mapStateToProps)(App);

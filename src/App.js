@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import SelectModel from "./components/SelectModel";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import ModelDetails from "./components/ModelDetails";
 
 class App extends Component {
-  // 
   state = {
     data: {
       "Ivel Z3": {
@@ -29,7 +28,7 @@ class App extends Component {
         origin: "USA"
       }
     },
-    selectedModel: ""
+    selectedModel: {}
   };
 
   addModel = (name, manufacturer, year, origin) => {
@@ -45,23 +44,26 @@ class App extends Component {
   };
 
   updateSelection = event => {
-    const name = event.target.value
-    const model = this.state.data[name]
-    this.setState({ selectedModel: {...model, name: name} });
+    const name = event.target.value;
+    const model = this.state.data[name];
+    this.setState({ selectedModel: { ...model, name: name } });
   };
 
   clickButton = event => {
-    event.preventDefault()
-    const model = this.state.selectedModel
-    this.props.dispatch(this.addModel(model.name, model.manufacturer, model.year, model.origin))
-  }
+    event.preventDefault();
+    const model = this.state.selectedModel;
+    if (model.name && model.year && model.manufacturer && model.origin) {
+      this.props.dispatch(
+        this.addModel(model.name, model.manufacturer, model.year, model.origin)
+      );
+    }
+  };
 
   render = () => {
     return (
       <div className="App">
-        {this.props.selectedModels.map(
-          (model, index) => {
-            return <ModelDetails key = {index}  model={model} />          
+        {this.props.selectedModels.map((model, index) => {
+          return <ModelDetails key={index} model={model} />;
         })}
         <SelectModel
           data={this.state.data}
@@ -70,12 +72,11 @@ class App extends Component {
         />
       </div>
     );
-      }
+  };
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return {selectedModels: state}
-}
+const mapStateToProps = state => {
+  return { selectedModels: state };
+};
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

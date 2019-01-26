@@ -28,14 +28,14 @@ class App extends Component {
     }
   };
 
-  handleSubmit = () => {
-    console.log("hi");
+  updateSelection = () => {
+    this.setState({selectedModel: this.value})
   };
 
   render = () => {
     return (
       <div className="App">
-        <SelectModel data={this.state.data} handleSubmit={this.handleSubmit} />
+        <SelectModel data={this.state.data} handleChange={this.updateSelection} />
       </div>
     );
   };

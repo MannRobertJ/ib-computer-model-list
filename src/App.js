@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import SelectModel from "./components/SelectModel";
 import { connect } from "react-redux";
 import ModelDetailsContainer from "./components/ModelDetailsContainer";
 
@@ -79,3 +78,31 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(App);
+
+
+// I would normally have put this in its own file, but since the homework instructions say first not to write as a module, then to make it a controlled component, I assumed it was meant to be written here as its own component. 
+class SelectModel extends React.Component {
+  state = { selectedModel: this.props.selectedModel };
+
+  render() {
+    return (
+      <form
+        value={this.state.selectedModel}
+        onChange={this.props.handleChange}
+        onSubmit={this.props.handleSubmit}
+      >
+        <select>
+          <option value=""> -- pick a model </option>
+          {Object.keys(this.props.data).map(name => (
+            <option value={name} key={name}>
+              {name} ({this.props.data[name].year})
+            </option>
+          ))}
+        </select>
+        <button type="submit" value="submit">
+          add model
+        </button>
+      </form>
+    );
+  }
+}

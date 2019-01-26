@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import SelectModel from "./components/SelectModel";
+import {connect} from 'react-redux'
 
 class App extends Component {
+  // 
   state = {
     data: {
       "Ivel Z3": {
@@ -29,9 +31,21 @@ class App extends Component {
     selectedModel: ""
   };
 
+  addModel = (manufacturer, year, origin) => {
+    return {
+      type: "ADD_MODEL",
+      payload: {
+        manufacturer: manufacturer,
+        year: year,
+        origin: origin
+      }
+    };
+  };
+
   updateSelection = event => {
-    this.setState({ selectedModel: event.target.value });
-    console.log(this.state.selectedModel);
+    const model = this.state.data[event.target.value]
+    this.setState({ selectedModel: model });
+    this.props.dispatch(this.addModel(model));
   };
 
   render = () => {
@@ -47,4 +61,8 @@ class App extends Component {
   };
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {selectedModels: state}
+}
+
+export default connect(mapStateToProps)(App)
